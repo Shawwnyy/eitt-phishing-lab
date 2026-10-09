@@ -1,0 +1,120 @@
+/* EITT — logo animé (SVG + CSS). Aucune dépendance externe.
+   Dimensions de référence : viewBox 295 x 100. Vitesses réglables via les variables ci-dessous. */
+
+.eitt-logo {
+  --eitt-cyan: #16def5;
+  --eitt-text: #3fd8e9;
+  --eitt-line: #a7a7a7;
+  --eitt-dim: #003040;
+  --eitt-tick: #4a6a72;
+  --eitt-spin-hatch: 7s;
+  --eitt-spin-ring: 40s;
+  --eitt-spin-dots: 9s;
+  --eitt-bars-cycle: 7s;
+
+  display: block;
+  width: var(--eitt-logo-w, clamp(220px, 60vw, 640px));
+  aspect-ratio: 295 / 100;
+  filter: drop-shadow(0 0 4px rgba(22, 222, 245, 0.28));
+}
+
+.eitt-logo--sm { --eitt-logo-w: clamp(120px, 28vw, 168px); }
+.eitt-logo--md { --eitt-logo-w: clamp(200px, 48vw, 320px); }
+.eitt-logo--lg { --eitt-logo-w: clamp(240px, 70vw, 560px); }
+
+.eitt-logo svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+.eitt-logo .c-fill { fill: var(--eitt-cyan); }
+.eitt-logo .c-stroke { stroke: var(--eitt-cyan); fill: none; }
+.eitt-logo .l-stroke { stroke: var(--eitt-line); fill: none; stroke-width: 1; }
+.eitt-logo .t-fill { fill: var(--eitt-text); stroke: var(--eitt-text); stroke-width: 0.8; stroke-linejoin: round; }
+
+/* Rotations : l'origine est le centre de l'emblème (49, 50). */
+.eitt-spin { transform-origin: 49px 50px; }
+.eitt-ring-a { animation: eitt-spin var(--eitt-spin-ring) linear infinite; }
+.eitt-ring-b { animation: eitt-spin calc(var(--eitt-spin-ring) * 0.7) linear infinite reverse; }
+.eitt-hatch { animation: eitt-spin var(--eitt-spin-hatch) linear infinite; }
+.eitt-dots { animation: eitt-wobble var(--eitt-spin-dots) ease-in-out infinite; }
+
+@keyframes eitt-spin { to { transform: rotate(360deg); } }
+@keyframes eitt-wobble {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(9deg); }
+  50% { transform: rotate(-6deg); }
+  75% { transform: rotate(12deg); }
+}
+
+/* Barres obliques : trois barres en convoi, aller-retour sur environ 7 s.
+   Pause de 2 s à chaque extrémité, glissement d'environ 1,5 s avec décalage. */
+.eitt-bar { animation-duration: var(--eitt-bars-cycle); animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite; animation-delay: -5.1s; }
+.eitt-bar-1 { animation-name: eitt-bar-1; }
+.eitt-bar-2 { animation-name: eitt-bar-2; }
+.eitt-bar-3 { animation-name: eitt-bar-3; }
+
+@keyframes eitt-bar-3 {
+  0%, 28.57% { transform: translateX(0); }
+  42.86%, 85.71% { transform: translateX(71px); }
+  100% { transform: translateX(0); }
+}
+@keyframes eitt-bar-2 {
+  0%, 32.14% { transform: translateX(0); }
+  46.43%, 82.14% { transform: translateX(71px); }
+  96.43%, 100% { transform: translateX(0); }
+}
+@keyframes eitt-bar-1 {
+  0%, 35.71% { transform: translateX(0); }
+  50%, 78.57% { transform: translateX(71px); }
+  92.86%, 100% { transform: translateX(0); }
+}
+
+/* Graduations : scintillement discret, jamais d'extinction complète. */
+.eitt-tick { stroke: var(--eitt-tick); stroke-width: 1; animation: eitt-tick 1.7s steps(1, end) infinite; }
+.eitt-tick:nth-child(2n) { animation-duration: 2.3s; animation-delay: -0.4s; }
+.eitt-tick:nth-child(3n) { animation-duration: 1.3s; animation-delay: -0.9s; }
+.eitt-tick:nth-child(5n) { animation-duration: 2.9s; animation-delay: -1.5s; }
+@keyframes eitt-tick {
+  0% { opacity: 0.45; }
+  30% { opacity: 1; }
+  55% { opacity: 0.6; }
+  80% { opacity: 0.9; }
+  100% { opacity: 0.45; }
+}
+
+/* Intro du texte (0 → 0,85 s) : scintillement, extinction, réapparition par paliers.
+   Jouée uniquement avec la classe .is-intro (au chargement ou via « Rejouer »). */
+.eitt-logo.is-intro .eitt-letter { animation-duration: 0.9s; animation-timing-function: step-end;
+  animation-iteration-count: 1; animation-fill-mode: both; }
+.eitt-logo.is-intro .eitt-letter-0 { animation-name: eitt-glitch-0; }
+.eitt-logo.is-intro .eitt-letter-1 { animation-name: eitt-glitch-1; }
+.eitt-logo.is-intro .eitt-letter-2 { animation-name: eitt-glitch-2; }
+.eitt-logo.is-intro .eitt-letter-3 { animation-name: eitt-glitch-3; }
+
+@keyframes eitt-glitch-0 {
+  0% { opacity: 0; } 11% { opacity: 0.5; } 17% { opacity: 0.2; } 28% { opacity: 0.6; }
+  33% { opacity: 0; } 39% { opacity: 0.5; } 50% { opacity: 0; } 72% { opacity: 0.35; }
+  78% { opacity: 0.7; } 85% { opacity: 0.85; } 94% { opacity: 1; } 100% { opacity: 1; }
+}
+@keyframes eitt-glitch-1 {
+  0% { opacity: 0.5; } 6% { opacity: 0.2; } 17% { opacity: 0.6; } 22% { opacity: 0.1; }
+  33% { opacity: 0.55; } 44% { opacity: 0.3; } 50% { opacity: 0; } 72% { opacity: 0.4; }
+  80% { opacity: 0.75; } 90% { opacity: 0.9; } 94% { opacity: 1; } 100% { opacity: 1; }
+}
+@keyframes eitt-glitch-2 {
+  0% { opacity: 0.4; } 8% { opacity: 0.6; } 14% { opacity: 0.15; } 25% { opacity: 0.5; }
+  36% { opacity: 0.2; } 44% { opacity: 0.6; } 50% { opacity: 0; } 72% { opacity: 0.5; }
+  76% { opacity: 0.8; } 88% { opacity: 0.95; } 94% { opacity: 1; } 100% { opacity: 1; }
+}
+@keyframes eitt-glitch-3 {
+  0% { opacity: 0.55; } 10% { opacity: 0.3; } 19% { opacity: 0.6; } 30% { opacity: 0.1; }
+  38% { opacity: 0.5; } 47% { opacity: 0.25; } 50% { opacity: 0; } 72% { opacity: 0.3; }
+  82% { opacity: 0.7; } 91% { opacity: 0.9; } 94% { opacity: 1; } 100% { opacity: 1; }
+}
+
+.eitt-logo.is-paused *, .eitt-logo.is-paused { animation-play-state: paused !important; }
+
+/* Mouvement réduit : image finale statique (texte visible, barres en bloc à gauche). */
+@media (prefers-reduced-motion: reduce) {
+  .eitt-logo *, .eitt-logo.is-intro .eitt-letter { animation: none !important; }
+  .eitt-logo .eitt-letter { opacity: 1 !important; }
+}

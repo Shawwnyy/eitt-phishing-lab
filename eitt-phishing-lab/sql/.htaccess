@@ -1,0 +1,2 @@
+# Les scripts SQL ne doivent jamais être servis par le site.
+Require all denied

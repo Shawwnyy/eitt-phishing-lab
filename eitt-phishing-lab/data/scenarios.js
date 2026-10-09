@@ -1,0 +1,1459 @@
+/* Généré par php/build-data.php à partir de data/scenarios.json — ne pas modifier à la main. */
+window.EITT_SCENARIOS = {
+    "version": 1,
+    "scenarios": [
+        {
+            "id": "s01",
+            "difficulty": 1,
+            "isPhishing": true,
+            "time": "Aujourd'hui, 08:42",
+            "sender": {
+                "name": "Colisio Livraison",
+                "address": "suivi-colis@colisio-livraisons-info.example"
+            },
+            "replyTo": null,
+            "subject": "Votre colis n'a pas pu être livré – action requise",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonjour,"
+                },
+                {
+                    "t": "p",
+                    "x": "Notre livreur n'a pas pu vous remettre votre colis (réf. CL-58204417) ce matin, car personne n'était présent à l'adresse indiquée."
+                },
+                {
+                    "t": "p",
+                    "x": "Votre colis est actuellement conservé dans notre centre de tri. Pour programmer une nouvelle livraison, vous devez régler des frais de réexpédition de 1,99 €."
+                },
+                {
+                    "t": "btn",
+                    "x": "Reprogrammer ma livraison",
+                    "url": "https://colisio-reexpedition.example/paiement?ref=CL58204417"
+                },
+                {
+                    "t": "p",
+                    "x": "Sans règlement sous 24 heures, votre colis sera retourné à l'expéditeur."
+                },
+                {
+                    "t": "sig",
+                    "x": "Service Clients Colisio"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "alert",
+                    "text": "L'adresse se termine par « colisio-livraisons-info.example ». Ce n'est pas le domaine habituel du service de livraison (colisio.example). Un nom d'affichage rassurant ne prouve rien : c'est l'adresse qui compte."
+                },
+                "context": {
+                    "flag": "alert",
+                    "text": "Votre note « Colis attendus » (dans Documents) indique qu'aucun colis n'est prévu cette semaine. Un message sur une livraison que vous n'attendez pas mérite une vérification."
+                },
+                "urgency": {
+                    "flag": "alert",
+                    "text": "Un délai de 24 heures, sous peine de retour du colis, pousse à agir vite sans vérifier."
+                },
+                "request": {
+                    "flag": "alert",
+                    "text": "On vous demande un petit paiement via un lien. Des frais minimes servent souvent à récupérer des coordonnées bancaires."
+                },
+                "links": {
+                    "flag": "alert",
+                    "text": "Le bouton mène vers « colisio-reexpedition.example », un autre domaine que celui de l'expéditeur. Aucun des deux ne correspond au site habituel."
+                },
+                "coherence": {
+                    "flag": "neutral",
+                    "text": "Le texte est bien écrit, mais générique : « Bonjour », aucun nom, aucune adresse de livraison. Il ne contient aucun détail que seul un vrai livreur connaîtrait."
+                }
+            },
+            "summary": "Plusieurs signaux concordent : colis non attendu, domaines qui ne correspondent pas, paiement via un lien et délai très court.",
+            "tips": [
+                "Ne payez jamais via le lien d'un message inattendu.",
+                "Ouvrez le site ou l'application du transporteur en tapant vous-même l'adresse habituelle, puis saisissez le numéro de suivi."
+            ],
+            "consequences": {
+                "trustedPhishing": "Dans une situation réelle, la page de paiement aurait pu vous demander votre numéro de carte bancaire. Ici, rien n'a été transmis : c'est une simulation."
+            }
+        },
+        {
+            "id": "s02",
+            "difficulty": 1,
+            "isPhishing": false,
+            "time": "Aujourd'hui, 08:15",
+            "sender": {
+                "name": "EITT — Ateliers",
+                "address": "ateliers@eitt-demo.example"
+            },
+            "replyTo": null,
+            "subject": "Confirmation de votre inscription à l'atelier « Premiers pas avec la messagerie »",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonjour Utilisateur EITT,"
+                },
+                {
+                    "t": "p",
+                    "x": "Nous confirmons votre inscription à l'atelier « Premiers pas avec la messagerie »."
+                },
+                {
+                    "t": "list",
+                    "items": [
+                        "Date : mercredi 14 octobre, de 14 h à 16 h",
+                        "Lieu : salle Ada Lovelace, 12 rue des Lilas (Valmont)",
+                        "Durée : 2 heures · matériel fourni"
+                    ]
+                },
+                {
+                    "t": "p",
+                    "x": "Aucune démarche supplémentaire n'est nécessaire. Si vous ne pouvez plus venir, répondez simplement à ce message : nous libérerons votre place."
+                },
+                {
+                    "t": "link",
+                    "x": "Voir le programme des ateliers",
+                    "url": "https://eitt-demo.example/ateliers"
+                },
+                {
+                    "t": "sig",
+                    "x": "L'équipe EITT"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "ok",
+                    "text": "L'adresse est sur le domaine eitt-demo.example, le même que votre messagerie et que les messages habituels de l'association."
+                },
+                "context": {
+                    "flag": "ok",
+                    "text": "Vous vous êtes inscrit(e) à cet atelier (voir « Mes inscriptions » dans Documents) : le message est attendu."
+                },
+                "urgency": {
+                    "flag": "ok",
+                    "text": "Aucune urgence : il n'y a rien à faire dans l'immédiat."
+                },
+                "request": {
+                    "flag": "ok",
+                    "text": "Aucune demande de mot de passe, de paiement ou de document. La seule action possible est de répondre si vous ne pouvez pas venir."
+                },
+                "links": {
+                    "flag": "ok",
+                    "text": "Le seul lien reste sur le domaine eitt-demo.example et ne demande aucune connexion."
+                },
+                "coherence": {
+                    "flag": "ok",
+                    "text": "Le message cite le titre exact de l'atelier, une date et un lieu : cela correspond à ce que vous avez réellement fait."
+                }
+            },
+            "summary": "Message attendu, expéditeur cohérent, aucune demande sensible : rien ne justifie un doute.",
+            "tips": [
+                "Un message attendu, cohérent et sans demande sensible peut être traité normalement.",
+                "Pour vérifier une date, comparez-la simplement avec votre agenda."
+            ],
+            "consequences": {
+                "reportedLegit": "Signaler ce message aurait fait perdre du temps à votre équipe de sécurité. Une alerte est plus utile lorsque plusieurs signaux concordent."
+            }
+        },
+        {
+            "id": "s03",
+            "difficulty": 1,
+            "isPhishing": true,
+            "time": "Aujourd'hui, 07:48",
+            "sender": {
+                "name": "Support Messagerie",
+                "address": "assistance@eitt-demo-messagerie.example"
+            },
+            "replyTo": null,
+            "subject": "URGENT : votre boîte mail sera suspendue dans 12 heures",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Cher utilisateur,"
+                },
+                {
+                    "t": "p",
+                    "x": "Nous avons constaté que votre boîte mail dépasse sa limite de stockage. Pour éviter la suspension de votre compte dans 12 heures, vous devez confirmer votre identité maintenant."
+                },
+                {
+                    "t": "p",
+                    "x": "Merci de saisir votre adresse e-mail et votre mot de passe sur la page de vérification :"
+                },
+                {
+                    "t": "link",
+                    "x": "Vérifier mon compte maintenant",
+                    "url": "https://verif-messagerie-eitt.example/connexion"
+                },
+                {
+                    "t": "p",
+                    "x": "Si vous ne faites rien, tous vos messages seront définitivement supprimés."
+                },
+                {
+                    "t": "sig",
+                    "x": "L'équipe Support"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "alert",
+                    "text": "Le domaine « eitt-demo-messagerie.example » ressemble à celui de votre messagerie (eitt-demo.example) sans être le même : c'est une imitation."
+                },
+                "context": {
+                    "flag": "alert",
+                    "text": "Aucune alerte de stockage ne s'est affichée dans votre messagerie. Un vrai problème serait visible dans votre application habituelle."
+                },
+                "urgency": {
+                    "flag": "alert",
+                    "text": "« URGENT », 12 heures, suppression définitive : la pression est maximale pour vous empêcher de réfléchir."
+                },
+                "request": {
+                    "flag": "alert",
+                    "text": "On vous demande votre mot de passe. Aucun service sérieux ne le demande par e-mail."
+                },
+                "links": {
+                    "flag": "alert",
+                    "text": "Le lien mène vers « verif-messagerie-eitt.example », un troisième domaine sans rapport avec votre messagerie."
+                },
+                "coherence": {
+                    "flag": "alert",
+                    "text": "« Cher utilisateur » : le message ne vous nomme pas et pourrait s'adresser à n'importe qui."
+                }
+            },
+            "summary": "Tous les signaux sont réunis : domaine imité, urgence, demande de mot de passe et lien vers un autre site.",
+            "tips": [
+                "Ne communiquez jamais votre mot de passe par e-mail ou via un lien reçu.",
+                "En cas de doute, ouvrez votre messagerie par votre application ou votre adresse habituelle."
+            ],
+            "consequences": {
+                "trustedPhishing": "Dans la réalité, votre identifiant et votre mot de passe auraient pu être récupérés, puis utilisés pour lire vos messages et écrire à vos contacts en votre nom. Ici, rien n'a été saisi ni transmis."
+            }
+        },
+        {
+            "id": "s04",
+            "difficulty": 2,
+            "isPhishing": false,
+            "time": "Aujourd'hui, 07:20",
+            "sender": {
+                "name": "Lettre EITT",
+                "address": "lettre@eitt-demo.example"
+            },
+            "replyTo": null,
+            "subject": "La lettre d'EITT — octobre : cybersécurité, ateliers et nouveautés",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonjour,"
+                },
+                {
+                    "t": "p",
+                    "x": "Voici la lettre d'octobre d'EITT, que vous recevez parce que vous êtes abonné(e) à nos informations."
+                },
+                {
+                    "t": "list",
+                    "items": [
+                        "Dossier du mois : reconnaître les messages piégés",
+                        "Agenda : trois nouveaux ateliers pour débutants",
+                        "Témoignage : « J'ai appris à utiliser mon smartphone à 72 ans »"
+                    ]
+                },
+                {
+                    "t": "link",
+                    "x": "Lire la lettre en ligne",
+                    "url": "https://eitt-demo.example/lettre/2026-10"
+                },
+                {
+                    "t": "link",
+                    "x": "Voir l'agenda complet",
+                    "url": "https://eitt-demo.example/agenda"
+                },
+                {
+                    "t": "p",
+                    "x": "Vous ne souhaitez plus recevoir cette lettre ? Vous pouvez vous désabonner à tout moment :"
+                },
+                {
+                    "t": "link",
+                    "x": "Me désabonner",
+                    "url": "https://eitt-demo.example/lettre/desabonnement"
+                },
+                {
+                    "t": "sig",
+                    "x": "L'équipe EITT"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "ok",
+                    "text": "L'adresse est sur le domaine eitt-demo.example, celui de l'association dont vous suivez les informations."
+                },
+                "context": {
+                    "flag": "ok",
+                    "text": "Vous êtes abonné(e) à cette lettre (voir « Mes inscriptions » dans Documents) : elle arrive à la date habituelle."
+                },
+                "urgency": {
+                    "flag": "ok",
+                    "text": "Aucune urgence : il s'agit de contenus à lire quand vous le souhaitez."
+                },
+                "request": {
+                    "flag": "ok",
+                    "text": "Aucune demande personnelle : ni mot de passe, ni paiement, ni document."
+                },
+                "links": {
+                    "flag": "ok",
+                    "text": "Trois liens, tous sur eitt-demo.example. Plusieurs liens ne rendent pas un message suspect : c'est leur destination qui compte."
+                },
+                "coherence": {
+                    "flag": "ok",
+                    "text": "Le contenu correspond à ce que l'association publie habituellement, y compris le lien de désabonnement."
+                }
+            },
+            "summary": "Newsletter attendue, expéditeur cohérent et liens qui restent sur le domaine habituel.",
+            "tips": [
+                "Beaucoup de liens ne signifient pas un piège : regardez surtout où ils mènent et ce que le message demande.",
+                "Le lien de désabonnement d'une newsletter attendue doit rester sur le domaine de l'expéditeur."
+            ],
+            "consequences": {
+                "reportedLegit": "Ce message ne présentait pas suffisamment d'indices pour conclure à une tentative de phishing : expéditeur connu, abonnement existant, liens cohérents."
+            }
+        },
+        {
+            "id": "s05",
+            "difficulty": 2,
+            "isPhishing": true,
+            "time": "Aujourd'hui, 06:52",
+            "sender": {
+                "name": "Alertes de sécurité",
+                "address": "alerte@securite-compte-eitt.example"
+            },
+            "replyTo": null,
+            "subject": "Nouvelle connexion à votre compte depuis Lisbonne",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonjour Utilisateur EITT,"
+                },
+                {
+                    "t": "p",
+                    "x": "Une connexion à votre compte a été détectée aujourd'hui à 06:48 :"
+                },
+                {
+                    "t": "list",
+                    "items": [
+                        "Appareil : ordinateur portable (Windows)",
+                        "Lieu approximatif : Lisbonne, Portugal",
+                        "Adresse IP : 198.51.100.24"
+                    ]
+                },
+                {
+                    "t": "p",
+                    "x": "Si c'était vous, vous n'avez rien à faire. Dans le cas contraire, sécurisez votre compte sans attendre."
+                },
+                {
+                    "t": "btn",
+                    "x": "Sécuriser mon compte",
+                    "url": "https://securite-compte-eitt.example/verification-appareil"
+                },
+                {
+                    "t": "p",
+                    "x": "Par sécurité, vous devrez vous reconnecter pour confirmer votre identité."
+                },
+                {
+                    "t": "sig",
+                    "x": "Équipe Sécurité"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "alert",
+                    "text": "Le domaine « securite-compte-eitt.example » n'est pas celui de votre messagerie (eitt-demo.example), qui envoie ses vraies notifications depuis son propre domaine."
+                },
+                "context": {
+                    "flag": "neutral",
+                    "text": "Une connexion inhabituelle est plausible : cela arrive réellement. Mais plausible ne veut pas dire authentique. Vérifiez depuis votre messagerie, pas depuis ce message."
+                },
+                "urgency": {
+                    "flag": "neutral",
+                    "text": "Le ton reste mesuré, sans menace. Seul « sans attendre » encourage à cliquer vite."
+                },
+                "request": {
+                    "flag": "alert",
+                    "text": "Le bouton vous demande de vous reconnecter : c'est la manière classique de récupérer des identifiants."
+                },
+                "links": {
+                    "flag": "alert",
+                    "text": "Le lien pointe vers le même domaine que l'expéditeur… qui n'est pas le vôtre. Les deux sont cohérents entre eux, mais faux."
+                },
+                "coherence": {
+                    "flag": "neutral",
+                    "text": "Le message cite votre nom et des détails crédibles. Un message bien fait reste suspect si l'expéditeur ne correspond pas."
+                }
+            },
+            "summary": "Message crédible, mais l'expéditeur n'est pas votre fournisseur et le bouton conduit à une reconnexion.",
+            "tips": [
+                "Quand une alerte vous inquiète, allez sur votre compte via l'application ou l'adresse habituelle et consultez l'historique de connexions.",
+                "Un message bien écrit et personnalisé n'est pas pour autant authentique."
+            ],
+            "consequences": {
+                "trustedPhishing": "Dans la réalité, une fausse page de connexion aurait pu enregistrer votre identifiant et votre mot de passe. Ici, rien n'a été saisi ni transmis."
+            }
+        },
+        {
+            "id": "s06",
+            "difficulty": 2,
+            "isPhishing": false,
+            "time": "Hier, 17:40",
+            "sender": {
+                "name": "Cabinet du Dr Lambert",
+                "address": "secretariat@cabinet-lambert-valmont.example"
+            },
+            "replyTo": null,
+            "subject": "Rappel : votre rendez-vous du jeudi 15 octobre à 14 h 30",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonjour,"
+                },
+                {
+                    "t": "p",
+                    "x": "Nous vous rappelons votre rendez-vous de contrôle avec le Dr Lambert le jeudi 15 octobre à 14 h 30, au cabinet (8 place du Marché, Valmont)."
+                },
+                {
+                    "t": "p",
+                    "x": "Pensez à apporter votre carte Vitale et vos ordonnances en cours."
+                },
+                {
+                    "t": "p",
+                    "x": "Si vous ne pouvez pas venir, merci de nous prévenir par téléphone au numéro habituel du cabinet, au moins 24 heures à l'avance."
+                },
+                {
+                    "t": "sig",
+                    "x": "Le secrétariat du cabinet"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "ok",
+                    "text": "Le domaine est propre au cabinet et correspond à celui de vos rappels précédents."
+                },
+                "context": {
+                    "flag": "ok",
+                    "text": "Ce rendez-vous figure dans votre agenda (voir « Agenda octobre » dans Documents)."
+                },
+                "urgency": {
+                    "flag": "ok",
+                    "text": "Le délai de 24 heures pour prévenir d'une absence est une règle de cabinet, pas une pression : rien ne vous est demandé tout de suite."
+                },
+                "request": {
+                    "flag": "ok",
+                    "text": "Rien à payer ni à envoyer en ligne : seulement des documents à apporter le jour du rendez-vous."
+                },
+                "links": {
+                    "flag": "ok",
+                    "text": "Aucun lien dans le message. Pour modifier, on vous renvoie vers le téléphone habituel du cabinet."
+                },
+                "coherence": {
+                    "flag": "ok",
+                    "text": "La date, l'heure et le lieu sont exacts, et la procédure proposée passe par un canal que vous connaissez déjà."
+                }
+            },
+            "summary": "Rappel attendu, sans lien, sans demande sensible, et cohérent avec votre agenda.",
+            "tips": [
+                "Un rappel de rendez-vous qui correspond à votre agenda et ne demande aucune donnée en ligne est rassurant.",
+                "En cas de doute sur un rendez-vous, appelez le numéro que vous connaissez déjà."
+            ],
+            "consequences": {
+                "reportedLegit": "Ce message ne présentait pas suffisamment d'indices pour conclure à une tentative de phishing : le rendez-vous est dans votre agenda et aucune action en ligne n'est demandée."
+            }
+        },
+        {
+            "id": "s07",
+            "difficulty": 3,
+            "isPhishing": true,
+            "time": "Hier, 15:12",
+            "sender": {
+                "name": "Marc Delorme · Ateliers Vallée",
+                "address": "m.delorme@ateliers-vallee.example"
+            },
+            "replyTo": null,
+            "subject": "Facture 2026-0418 – échéance dépassée",
+            "attachments": [
+                {
+                    "name": "Facture_2026-0418.pdf.zip",
+                    "size": "212 Ko"
+                }
+            ],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonjour,"
+                },
+                {
+                    "t": "p",
+                    "x": "Sauf erreur de notre part, la facture 2026-0418 d'un montant de 487,60 € TTC, relative à la prestation de septembre, n'a pas encore été réglée. L'échéance était fixée au 30 septembre."
+                },
+                {
+                    "t": "p",
+                    "x": "Vous la trouverez en pièce jointe. Merci de procéder au règlement dès que possible afin d'éviter des pénalités de retard."
+                },
+                {
+                    "t": "p",
+                    "x": "Si le virement a déjà été effectué, merci de ne pas tenir compte de ce message."
+                },
+                {
+                    "t": "p",
+                    "x": "Bien cordialement,"
+                },
+                {
+                    "t": "sig",
+                    "x": "Marc Delorme\nComptabilité clients — Ateliers Vallée"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "neutral",
+                    "text": "L'adresse est cohérente avec le nom de l'entreprise, ce qui rend le message plus crédible. Mais rien ne rattache « Ateliers Vallée » à une relation que vous avez."
+                },
+                "context": {
+                    "flag": "alert",
+                    "text": "Vos documents (« Fournisseurs ») ne mentionnent aucune prestation, aucun devis ni aucun prestataire de ce nom : vous ne vous attendiez pas à cette facture."
+                },
+                "urgency": {
+                    "flag": "neutral",
+                    "text": "Le ton est professionnel : un rappel d'échéance et des pénalités possibles, sans menace excessive. Une facture réelle peut dire la même chose."
+                },
+                "request": {
+                    "flag": "alert",
+                    "text": "On vous demande de payer une facture inconnue et d'ouvrir une pièce jointe pour la consulter."
+                },
+                "links": {
+                    "flag": "alert",
+                    "text": "Aucun lien, mais la pièce jointe « Facture_2026-0418.pdf.zip » est une archive compressée et non un PDF : l'extension finale est trompeuse."
+                },
+                "coherence": {
+                    "flag": "alert",
+                    "text": "Rien ne vous identifie comme client (ni nom, ni numéro de client) et le « sauf erreur de notre part » permet à n'importe quel destinataire de se sentir concerné."
+                }
+            },
+            "summary": "Message sobre et bien écrit, mais sans lien avec une prestation connue, avec une pièce jointe compressée.",
+            "tips": [
+                "N'ouvrez jamais la pièce jointe d'une facture que vous n'attendez pas : contactez l'entreprise par un numéro que vous avez trouvé vous-même.",
+                "Méfiez-vous des archives (.zip) ou des doubles extensions présentées comme des documents."
+            ],
+            "consequences": {
+                "trustedPhishing": "Dans la réalité, ouvrir cette archive aurait pu installer un logiciel malveillant sur l'ordinateur. Ici, la pièce jointe est factice et rien n'a été exécuté."
+            }
+        },
+        {
+            "id": "s08",
+            "difficulty": 3,
+            "isPhishing": false,
+            "time": "Hier, 11:05",
+            "sender": {
+                "name": "Mairie de Valmont — Service Population",
+                "address": "population@mairie-valmont.example"
+            },
+            "replyTo": null,
+            "subject": "Votre dossier est complet — retrait de votre titre avant le 30 octobre",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Madame, Monsieur,"
+                },
+                {
+                    "t": "p",
+                    "x": "Nous avons bien reçu votre dossier de renouvellement de titre d'identité (récépissé n° VAL-2026-3391)."
+                },
+                {
+                    "t": "p",
+                    "x": "Votre dossier est complet. Votre nouveau titre sera disponible à l'accueil de la mairie à partir du 20 octobre. Il devra être retiré avant le 30 octobre : passé ce délai, des démarches supplémentaires pourront être nécessaires."
+                },
+                {
+                    "t": "p",
+                    "x": "Aucun paiement ni document supplémentaire n'est demandé pour le moment. Pour toute question, vous pouvez prendre rendez-vous sur le site de la mairie."
+                },
+                {
+                    "t": "link",
+                    "x": "Prendre rendez-vous (facultatif)",
+                    "url": "https://mairie-valmont.example/rendez-vous"
+                },
+                {
+                    "t": "sig",
+                    "x": "Service Population — Mairie de Valmont"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "ok",
+                    "text": "Le domaine est celui de la mairie de Valmont, cohérent avec la démarche que vous avez effectuée."
+                },
+                "context": {
+                    "flag": "ok",
+                    "text": "Votre note « Dossier mairie » mentionne le dépôt de ce dossier et le même numéro de récépissé."
+                },
+                "urgency": {
+                    "flag": "neutral",
+                    "text": "Une date limite est mentionnée (30 octobre). Une date limite n'est pas une preuve de phishing : ici elle est lointaine, expliquée et sans menace."
+                },
+                "request": {
+                    "flag": "ok",
+                    "text": "Aucune demande de données, de paiement ni de confirmation par lien. On vous invite à vous rendre à l'accueil."
+                },
+                "links": {
+                    "flag": "ok",
+                    "text": "Un seul lien, facultatif, sur le domaine de la mairie."
+                },
+                "coherence": {
+                    "flag": "ok",
+                    "text": "Le numéro de récépissé correspond à celui de votre dossier, et le déroulé (dépôt, puis retrait en mairie) est celui que vous connaissez."
+                }
+            },
+            "summary": "Message administratif cohérent avec une démarche réelle, sans demande sensible : la date limite n'est pas, à elle seule, un signal d'alerte.",
+            "tips": [
+                "Un message qui mentionne une date limite n'est pas forcément un piège : regardez surtout ce qu'on vous demande de faire.",
+                "Comparez toujours un numéro de dossier avec celui que vous avez noté lors de votre démarche."
+            ],
+            "consequences": {
+                "reportedLegit": "Ce message ne présentait pas suffisamment d'indices pour conclure à une tentative de phishing : le numéro de dossier correspond au vôtre et rien n'est demandé en ligne."
+            }
+        },
+        {
+            "id": "s09",
+            "difficulty": 3,
+            "isPhishing": true,
+            "time": "Hier, 09:20",
+            "sender": {
+                "name": "Camille Renard — Direction EITT",
+                "address": "camille.renard@eitt-demo.example"
+            },
+            "replyTo": "camille.renard.direction@eitt-demo-direction.example",
+            "subject": "Dossier assurance des bénévoles — pièces à renvoyer aujourd'hui",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonjour,"
+                },
+                {
+                    "t": "p",
+                    "x": "Dans le cadre du renouvellement de l'assurance des bénévoles, l'assureur nous demande de compléter les dossiers avant ce soir."
+                },
+                {
+                    "t": "p",
+                    "x": "Pourriez-vous me répondre directement avec une photo de votre carte d'identité et votre RIB ? Je transmets l'ensemble à l'assureur en fin de journée."
+                },
+                {
+                    "t": "p",
+                    "x": "Merci d'avance pour votre réactivité, je sais que la journée est chargée."
+                },
+                {
+                    "t": "sig",
+                    "x": "Camille Renard\nDirection — EITT"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "alert",
+                    "text": "L'adresse d'affichage paraît interne (eitt-demo.example), mais l'en-tête « Répondre à » indique une autre adresse sur un domaine externe (eitt-demo-direction.example) : votre réponse partirait ailleurs. Les détails du message le montrent."
+                },
+                "context": {
+                    "flag": "alert",
+                    "text": "Vous participez aux ateliers mais n'êtes pas bénévole (voir « Mes inscriptions » dans Documents) : une demande d'assurance de bénévoles n'a pas de raison de vous concerner."
+                },
+                "urgency": {
+                    "flag": "alert",
+                    "text": "« Avant ce soir » et l'appel à la « réactivité » réduisent le temps dont vous disposez pour vérifier."
+                },
+                "request": {
+                    "flag": "alert",
+                    "text": "Une pièce d'identité et un RIB par simple réponse e-mail : des documents très sensibles, à ne jamais envoyer sans canal sécurisé ni vérification."
+                },
+                "links": {
+                    "flag": "neutral",
+                    "text": "Aucun lien. Le danger passe par la réponse elle-même, qui irait vers l'adresse « Répondre à »."
+                },
+                "coherence": {
+                    "flag": "neutral",
+                    "text": "Le ton aimable (« je sais que la journée est chargée ») et l'urgence servent à court-circuiter la prudence. Aucun nom d'assureur ni de contrat n'est cité."
+                }
+            },
+            "summary": "Un message qui semble venir de la direction mais dont la réponse part vers un autre domaine, avec une demande de documents sensibles dans l'urgence.",
+            "tips": [
+                "Avant de répondre, consultez les détails du message, notamment l'adresse « Répondre à ».",
+                "Une demande de documents d'identité ou bancaires doit toujours être confirmée par un autre canal (téléphone, rencontre) avec un numéro que vous connaissez."
+            ],
+            "consequences": {
+                "trustedPhishing": "Dans la réalité, ces documents auraient permis une usurpation d'identité ou une fraude bancaire. Ici, rien n'a été envoyé."
+            }
+        },
+        {
+            "id": "s10",
+            "difficulty": 3,
+            "isPhishing": false,
+            "time": "Mer. 7 oct., 18:14",
+            "sender": {
+                "name": "Sécurité EITT",
+                "address": "no-reply@eitt-demo.example"
+            },
+            "replyTo": null,
+            "subject": "Votre mot de passe a été modifié",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonjour Utilisateur EITT,"
+                },
+                {
+                    "t": "p",
+                    "x": "Le mot de passe de votre compte a été modifié mercredi à 18:12 depuis votre appareil habituel (Windows, Valmont)."
+                },
+                {
+                    "t": "p",
+                    "x": "Aucune action n'est requise si vous êtes à l'origine de cette modification."
+                },
+                {
+                    "t": "p",
+                    "x": "Si vous ne reconnaissez pas ce changement, n'utilisez pas de lien reçu par e-mail : ouvrez votre messagerie depuis votre application ou votre adresse habituelle, rendez-vous dans « Paramètres > Sécurité », puis contactez l'assistance depuis l'aide en ligne."
+                },
+                {
+                    "t": "sig",
+                    "x": "Sécurité EITT"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "ok",
+                    "text": "Le domaine est identique à celui de votre messagerie (eitt-demo.example)."
+                },
+                "context": {
+                    "flag": "ok",
+                    "text": "Votre note « Sécurité du compte » indique que vous avez changé votre mot de passe mercredi soir."
+                },
+                "urgency": {
+                    "flag": "ok",
+                    "text": "Aucune urgence : le message précise qu'« aucune action n'est requise »."
+                },
+                "request": {
+                    "flag": "ok",
+                    "text": "Le message ne demande ni mot de passe ni clic. Il vous conseille même de ne pas utiliser de lien reçu par e-mail."
+                },
+                "links": {
+                    "flag": "ok",
+                    "text": "Aucun lien dans le message : les instructions passent par votre application ou votre adresse habituelle."
+                },
+                "coherence": {
+                    "flag": "ok",
+                    "text": "L'heure, l'appareil et le lieu correspondent à ce que vous avez fait. Une notification de sécurité n'est pas un piège en soi : ce qu'elle demande de faire compte davantage."
+                }
+            },
+            "summary": "Notification de sécurité attendue, cohérente avec votre action, sans lien ni demande sensible.",
+            "tips": [
+                "Une notification de sécurité légitime vous renvoie vers votre application ou votre adresse habituelle, jamais vers un lien inattendu.",
+                "Comparez toujours le message avec ce que vous avez réellement fait (ici : un changement de mot de passe)."
+            ],
+            "consequences": {
+                "reportedLegit": "Ce message ne présentait pas suffisamment d'indices pour conclure à une tentative de phishing : il correspond à votre action de mercredi soir et ne demande rien."
+            }
+        },
+        {
+            "id": "s11",
+            "difficulty": 1,
+            "isPhishing": true,
+            "time": "Aujourd'hui, 09:10",
+            "sender": {
+                "name": "Agence Fiscale Nationale",
+                "address": "remboursement@afn-remboursements-en-ligne.example"
+            },
+            "replyTo": null,
+            "subject": "Remboursement d'impôt de 312,40 € : confirmez vos coordonnées",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonjour,"
+                },
+                {
+                    "t": "p",
+                    "x": "Après le calcul de votre dossier, vous avez droit à un remboursement de 312,40 €."
+                },
+                {
+                    "t": "p",
+                    "x": "Pour le recevoir, vous devez confirmer vos coordonnées bancaires et les informations de votre carte avant 48 heures. Passé ce délai, le remboursement sera annulé."
+                },
+                {
+                    "t": "btn",
+                    "x": "Recevoir mon remboursement",
+                    "url": "https://afn-remboursements-en-ligne.example/formulaire"
+                },
+                {
+                    "t": "sig",
+                    "x": "Service des remboursements"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "alert",
+                    "text": "Le nom évoque une administration, mais l'adresse utilise un domaine inconnu à rallonge (« afn-remboursements-en-ligne.example »). Une administration écrit depuis son domaine officiel."
+                },
+                "context": {
+                    "flag": "alert",
+                    "text": "Votre note « Démarches administratives » indique qu'aucun remboursement n'est annoncé. Recevoir de l'argent que vous n'attendez pas est un signal."
+                },
+                "urgency": {
+                    "flag": "alert",
+                    "text": "Un délai de 48 heures sous peine d'annulation est une pression typique : elle empêche de vérifier."
+                },
+                "request": {
+                    "flag": "alert",
+                    "text": "On vous demande vos coordonnées bancaires et votre carte pour « recevoir » de l'argent. On ne donne jamais sa carte pour être payé."
+                },
+                "links": {
+                    "flag": "alert",
+                    "text": "Le bouton mène vers le même domaine douteux : un formulaire de collecte, pas un service officiel."
+                },
+                "coherence": {
+                    "flag": "neutral",
+                    "text": "Le texte est court et précis (312,40 €), mais sans numéro de dossier ni identité : n'importe qui pourrait recevoir ce même message."
+                }
+            },
+            "summary": "Remboursement inattendu, domaine inconnu, délai de 48 h et demande de carte bancaire : un scénario classique de collecte de données bancaires.",
+            "tips": [
+                "Une administration ne vous demande jamais votre carte bancaire pour vous verser de l'argent.",
+                "Connectez-vous à votre espace personnel en tapant vous-même l'adresse habituelle, pas via un lien reçu."
+            ],
+            "consequences": {
+                "trustedPhishing": "Dans une situation réelle, le formulaire aurait enregistré votre numéro de carte et pu servir à des achats frauduleux. Ici, rien n'a été transmis."
+            }
+        },
+        {
+            "id": "s12",
+            "difficulty": 1,
+            "isPhishing": false,
+            "time": "Aujourd'hui, 08:58",
+            "sender": {
+                "name": "Fibrabox",
+                "address": "factures@fibrabox.example"
+            },
+            "replyTo": null,
+            "subject": "Votre facture de septembre est disponible (29,99 €)",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonjour Utilisateur EITT,"
+                },
+                {
+                    "t": "p",
+                    "x": "Votre facture de septembre est disponible dans votre espace client. Montant : 29,99 €, déjà prélevé le 5 octobre comme chaque mois."
+                },
+                {
+                    "t": "p",
+                    "x": "Pour la consulter, ouvrez l'application Fibrabox ou saisissez vous-même fibrabox.example dans votre navigateur. Aucune action n'est nécessaire : rien à payer, rien à confirmer."
+                },
+                {
+                    "t": "sig",
+                    "x": "Service clients Fibrabox"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "ok",
+                    "text": "L'adresse correspond au domaine de votre fournisseur indiqué dans vos notes (fibrabox.example)."
+                },
+                "context": {
+                    "flag": "ok",
+                    "text": "Votre note « Abonnements maison » indique Fibrabox, 29,99 € prélevés le 5 du mois : le message est attendu."
+                },
+                "urgency": {
+                    "flag": "ok",
+                    "text": "Aucun délai, aucune menace : le message informe seulement."
+                },
+                "request": {
+                    "flag": "ok",
+                    "text": "Aucune demande : ni paiement, ni mot de passe, ni clic obligatoire. On vous invite à ouvrir vous-même votre espace."
+                },
+                "links": {
+                    "flag": "ok",
+                    "text": "Il n'y a aucun lien : le message vous invite à saisir vous-même l'adresse, c'est le bon réflexe."
+                },
+                "coherence": {
+                    "flag": "ok",
+                    "text": "Le montant (29,99 €), la date de prélèvement et votre nom correspondent à vos notes."
+                }
+            },
+            "summary": "Message attendu, montant et date conformes, aucune action demandée et aucun lien.",
+            "tips": [
+                "Un message qui vous renvoie vers votre application ou votre espace habituel, sans lien ni demande, est plutôt rassurant.",
+                "Comparez toujours le montant avec votre relevé."
+            ],
+            "consequences": {
+                "reportedLegit": "Ce message ne présentait pas d'indice de phishing : l'expéditeur, le montant et la date correspondent à vos notes, et aucune action n'est demandée."
+            }
+        },
+        {
+            "id": "s13",
+            "difficulty": 2,
+            "isPhishing": true,
+            "time": "Aujourd'hui, 08:30",
+            "sender": {
+                "name": "Julien Marchand",
+                "address": "julien.marchand.lyon@webmail-gratuit.example"
+            },
+            "replyTo": null,
+            "subject": "Un petit service, c'est urgent",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Salut ! J’espère que tu vas bien."
+                },
+                {
+                    "t": "p",
+                    "x": "Je suis bloqué à l'étranger : on m'a volé mon sac et mon téléphone ne marche plus. J'ai besoin d'un service urgent."
+                },
+                {
+                    "t": "p",
+                    "x": "Peux-tu acheter deux cartes cadeaux de 100 € dans un bureau de tabac et m'envoyer les codes par retour de mail ? Je te rembourse dès mon retour, promis."
+                },
+                {
+                    "t": "p",
+                    "x": "Ne cherche pas à m'appeler, je n'ai plus mon téléphone. Réponds-moi vite, merci !"
+                },
+                {
+                    "t": "sig",
+                    "x": "Julien"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "alert",
+                    "text": "Le nom est celui de votre ami, mais l'adresse (« julien.marchand.lyon@webmail-gratuit.example ») n'est pas celle de vos notes (« julien.marchand@courriel-perso.example »). Un compte piraté ou une copie qui imite le nom."
+                },
+                "context": {
+                    "flag": "alert",
+                    "text": "Vos notes « Famille et amis » indiquent que Julien habite Lyon et que vous avez marché avec lui dimanche : un voyage soudain à l'étranger est surprenant."
+                },
+                "urgency": {
+                    "flag": "alert",
+                    "text": "« Urgent », « réponds-moi vite » : on veut vous empêcher de vérifier."
+                },
+                "request": {
+                    "flag": "alert",
+                    "text": "Des codes de cartes cadeaux : un moyen de paiement presque impossible à récupérer. Un ami ne demande pas cela par e-mail."
+                },
+                "links": {
+                    "flag": "neutral",
+                    "text": "Aucun lien ni pièce jointe : le danger est dans la demande, pas dans un clic."
+                },
+                "coherence": {
+                    "flag": "alert",
+                    "text": "« Ne cherche pas à m'appeler » est le meilleur indice : il vous empêche de vérifier par un autre canal."
+                }
+            },
+            "summary": "Un « ami » qui demande des codes de cartes cadeaux en urgence, depuis une autre adresse, en vous demandant de ne pas l'appeler.",
+            "tips": [
+                "Appelez votre ami avec le numéro que vous connaissez avant de répondre.",
+                "Aucun ami n'a besoin de codes de cartes cadeaux par e-mail : c'est un indice fort d'arnaque."
+            ],
+            "consequences": {
+                "trustedPhishing": "Dans la réalité, les codes envoyés auraient été utilisés immédiatement et l'argent n'aurait pas pu être récupéré. Ici, rien n'a été acheté ni envoyé."
+            }
+        },
+        {
+            "id": "s14",
+            "difficulty": 1,
+            "isPhishing": false,
+            "time": "Aujourd'hui, 07:55",
+            "sender": {
+                "name": "Médiathèque de Valmont",
+                "address": "reservations@valmont-mediatheque.example"
+            },
+            "replyTo": null,
+            "subject": "Votre réservation est disponible : « Les oiseaux du Jura »",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonjour Utilisateur EITT,"
+                },
+                {
+                    "t": "p",
+                    "x": "Le livre « Les oiseaux du Jura », que vous avez réservé le 3 octobre, est disponible à l'accueil de la médiathèque."
+                },
+                {
+                    "t": "list",
+                    "items": [
+                        "Réservé pour vous jusqu'au 16 octobre",
+                        "Horaires : du mardi au samedi, de 10 h à 18 h",
+                        "Pensez à apporter votre carte de lecteur"
+                    ]
+                },
+                {
+                    "t": "p",
+                    "x": "Si vous ne pouvez plus venir, il suffit de ne rien faire : la réservation expirera toute seule."
+                },
+                {
+                    "t": "sig",
+                    "x": "L'équipe de la médiathèque"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "neutral",
+                    "text": "Vos notes ne donnent pas l'adresse de la médiathèque : vous ne pouvez pas la comparer. Elle reste cohérente avec le nom de l'établissement ; le reste du message permet de trancher."
+                },
+                "context": {
+                    "flag": "ok",
+                    "text": "Votre note « Médiathèque et club de lecture » indique que vous avez réservé ce livre le 3 octobre."
+                },
+                "urgency": {
+                    "flag": "ok",
+                    "text": "Une date limite (16 octobre) existe, mais elle est normale et sans menace : il suffit de ne rien faire pour annuler."
+                },
+                "request": {
+                    "flag": "ok",
+                    "text": "On vous demande de passer à l'accueil avec votre carte : rien à faire en ligne."
+                },
+                "links": {
+                    "flag": "ok",
+                    "text": "Aucun lien ni pièce jointe."
+                },
+                "coherence": {
+                    "flag": "ok",
+                    "text": "Le titre du livre et la date de réservation correspondent à vos notes."
+                }
+            },
+            "summary": "Message attendu : réservation connue, aucune action en ligne, aucun lien.",
+            "tips": [
+                "Un message qui vous demande de vous déplacer plutôt que de cliquer est en général plus rassurant.",
+                "Vérifiez que le titre ou la date correspondent à ce que vous avez réellement fait."
+            ],
+            "consequences": {
+                "reportedLegit": "Ce message ne présentait pas d'indice de phishing : la réservation figure dans vos notes et il ne demande aucune action en ligne."
+            }
+        },
+        {
+            "id": "s15",
+            "difficulty": 2,
+            "isPhishing": true,
+            "time": "Aujourd'hui, 06:20",
+            "sender": {
+                "name": "Banque du Val — Sécurité",
+                "address": "securite@banque-duval-alertes.example"
+            },
+            "replyTo": null,
+            "subject": "Carte bloquée : validez votre identité maintenant",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Cher client,"
+                },
+                {
+                    "t": "p",
+                    "x": "Une opération inhabituelle a été détectée sur votre carte. Par précaution, elle a été bloquée."
+                },
+                {
+                    "t": "p",
+                    "x": "Pour la débloquer, confirmez votre identité en renseignant le numéro de votre carte et le code à 6 chiffres que vous allez recevoir par SMS."
+                },
+                {
+                    "t": "btn",
+                    "x": "Débloquer ma carte",
+                    "url": "https://banque-duval-verification.example/identite"
+                },
+                {
+                    "t": "p",
+                    "x": "Sans validation dans les 2 heures, votre compte sera suspendu."
+                },
+                {
+                    "t": "sig",
+                    "x": "Service Sécurité"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "alert",
+                    "text": "Le nom évoque votre banque, mais le domaine (« banque-duval-alertes.example ») n'est pas celui de vos notes (banqueduval.example)."
+                },
+                "context": {
+                    "flag": "alert",
+                    "text": "Votre note « Ma banque » précise que votre carte fonctionne et que votre banque ne demande jamais de code par e-mail ou par SMS."
+                },
+                "urgency": {
+                    "flag": "alert",
+                    "text": "Deux heures avant la suspension : un délai très court pour vous empêcher de réfléchir."
+                },
+                "request": {
+                    "flag": "alert",
+                    "text": "Numéro de carte et code SMS : exactement ce qu'un fraudeur veut pour valider un paiement à votre place."
+                },
+                "links": {
+                    "flag": "alert",
+                    "text": "Le bouton mène vers « banque-duval-verification.example », encore un autre domaine, différent de celui de l'expéditeur et de votre banque."
+                },
+                "coherence": {
+                    "flag": "neutral",
+                    "text": "« Cher client » est générique : une vraie banque s'adresserait à vous par votre nom. Le texte est correct, ce qui ne prouve rien."
+                }
+            },
+            "summary": "Carte « bloquée », domaine qui imite la banque, délai de 2 h, demande de carte et de code SMS : tous les signaux concordent.",
+            "tips": [
+                "Une banque ne vous demande jamais votre code SMS ni votre carte par e-mail.",
+                "En cas de doute, appelez le numéro au dos de votre carte ou ouvrez l'application de votre banque."
+            ],
+            "consequences": {
+                "trustedPhishing": "Dans une situation réelle, le code SMS aurait servi à valider un paiement ou un virement à votre insu. Ici, rien n'a été transmis."
+            }
+        },
+        {
+            "id": "s16",
+            "difficulty": 2,
+            "isPhishing": false,
+            "time": "Hier, 19:30",
+            "sender": {
+                "name": "Hélène Vidal — Club de lecture",
+                "address": "helene.vidal@club-lecture-valmont.example"
+            },
+            "replyTo": null,
+            "subject": "Changement de salle pour jeudi 15 octobre",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonsoir Utilisateur EITT,"
+                },
+                {
+                    "t": "p",
+                    "x": "Petite modification pour notre prochaine réunion : jeudi 15 octobre, à 18 h, nous nous retrouverons salle Ada Lovelace, et non plus salle des Lilas (travaux)."
+                },
+                {
+                    "t": "p",
+                    "x": "L'adresse ne change pas : 12 rue des Lilas. Pourriez-vous me répondre simplement « oui » si vous venez, afin que je prévoie les chaises ?"
+                },
+                {
+                    "t": "sig",
+                    "x": "Hélène"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "ok",
+                    "text": "L'adresse est celle que vous avez notée pour Hélène Vidal (« club-lecture-valmont.example »)."
+                },
+                "context": {
+                    "flag": "ok",
+                    "text": "Vos notes mentionnent la réunion du club le jeudi 15 octobre à 18 h, animée par Hélène Vidal : le message en parle."
+                },
+                "urgency": {
+                    "flag": "ok",
+                    "text": "Aucune pression : l'information est donnée simplement."
+                },
+                "request": {
+                    "flag": "ok",
+                    "text": "On vous demande de répondre « oui » : une réponse banale, sans donnée sensible. Répondre à une personne que vous connaissez, pour une question simple, est normal."
+                },
+                "links": {
+                    "flag": "ok",
+                    "text": "Aucun lien ni pièce jointe."
+                },
+                "coherence": {
+                    "flag": "ok",
+                    "text": "Date, heure et lieu sont cohérents avec vos notes ; le changement de salle est expliqué."
+                }
+            },
+            "summary": "Message d'une personne connue, attendu, cohérent avec vos notes, sans lien ni demande sensible.",
+            "tips": [
+                "Répondre à un message attendu d'une personne connue, sans donner d'information sensible, est sans risque.",
+                "Comparez l'adresse avec celle que vous avez déjà : ici, elle est identique."
+            ],
+            "consequences": {
+                "reportedLegit": "Ce message ne présentait pas d'indice de phishing : l'adresse est celle d'Hélène Vidal dans vos notes et la demande est simple."
+            }
+        },
+        {
+            "id": "s17",
+            "difficulty": 2,
+            "isPhishing": true,
+            "time": "Hier, 13:40",
+            "sender": {
+                "name": "AntiVirus Pro — Facturation",
+                "address": "facturation@antivirus-protect-pro-billing.example"
+            },
+            "replyTo": null,
+            "subject": "Facture AVP-8841 : abonnement renouvelé (89,99 €)",
+            "attachments": [
+                {
+                    "name": "Facture-AVP-8841.pdf.exe",
+                    "size": "1,4 Mo"
+                }
+            ],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonjour,"
+                },
+                {
+                    "t": "p",
+                    "x": "Votre abonnement AntiVirus Pro 3 ans a été renouvelé automatiquement. Un montant de 89,99 € sera débité de votre compte dans 24 heures."
+                },
+                {
+                    "t": "p",
+                    "x": "Si vous n'êtes pas à l'origine de ce renouvellement, appelez immédiatement notre service d'annulation au 01 99 00 45 67. Un conseiller prendra le contrôle de votre ordinateur pour annuler le prélèvement."
+                },
+                {
+                    "t": "p",
+                    "x": "Vous trouverez la facture en pièce jointe."
+                },
+                {
+                    "t": "sig",
+                    "x": "Service Facturation"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "alert",
+                    "text": "Le domaine « antivirus-protect-pro-billing.example » est à rallonge et ne correspond à aucun fournisseur que vous connaissez."
+                },
+                "context": {
+                    "flag": "alert",
+                    "text": "Votre note « Abonnements maison » indique que vous n'avez aucun antivirus payant ni abonnement logiciel : vous ne pouvez rien avoir « renouvelé »."
+                },
+                "urgency": {
+                    "flag": "alert",
+                    "text": "Un débit « dans 24 heures » pousse à appeler sans réfléchir."
+                },
+                "request": {
+                    "flag": "alert",
+                    "text": "On vous demande d'appeler un numéro et de laisser un inconnu « prendre le contrôle » de votre ordinateur : c'est le but de l'arnaque."
+                },
+                "links": {
+                    "flag": "alert",
+                    "text": "La pièce jointe « Facture-AVP-8841.pdf.exe » est un programme (.exe) déguisé en PDF. Ne l'ouvrez jamais."
+                },
+                "coherence": {
+                    "flag": "neutral",
+                    "text": "Le numéro de facture et le montant paraissent précis, mais ne vous concernent pas : ils servent à inquiéter."
+                }
+            },
+            "summary": "Facture d'un abonnement que vous n'avez pas souscrit, pièce jointe .exe déguisée et numéro à appeler pour « annuler » : une arnaque au faux support technique.",
+            "tips": [
+                "Ne rappelez jamais un numéro figurant dans un message inattendu ; vérifiez plutôt votre relevé bancaire.",
+                "Un fichier « .pdf.exe » est un programme : ne l'ouvrez jamais, et ne laissez personne prendre le contrôle de votre ordinateur à distance."
+            ],
+            "consequences": {
+                "trustedPhishing": "Dans la réalité, le faux conseiller aurait pu installer un logiciel espion ou vous faire payer de fausses « réparations ». Ici, aucun appel ni aucun fichier n'a été exécuté."
+            }
+        },
+        {
+            "id": "s18",
+            "difficulty": 3,
+            "isPhishing": false,
+            "time": "Mar. 6 oct., 10:05",
+            "sender": {
+                "name": "Banque du Val",
+                "address": "information@banqueduval.example"
+            },
+            "replyTo": null,
+            "subject": "Votre relevé de septembre est disponible",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonjour Utilisateur EITT,"
+                },
+                {
+                    "t": "p",
+                    "x": "Votre relevé de compte de septembre est disponible dans votre espace client."
+                },
+                {
+                    "t": "p",
+                    "x": "Pour le consulter, ouvrez l'application de la Banque du Val ou saisissez vous-même banqueduval.example dans votre navigateur."
+                },
+                {
+                    "t": "p",
+                    "x": "Rappel de sécurité : la Banque du Val ne vous demandera jamais votre code confidentiel, votre numéro de carte complet ni un code reçu par SMS, que ce soit par e-mail, par SMS ou par téléphone."
+                },
+                {
+                    "t": "sig",
+                    "x": "Banque du Val"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "ok",
+                    "text": "L'adresse utilise le domaine banqueduval.example, celui de vos notes."
+                },
+                "context": {
+                    "flag": "ok",
+                    "text": "Votre note « Ma banque » précise que vos relevés sont dans votre espace client : un relevé mensuel est normal."
+                },
+                "urgency": {
+                    "flag": "ok",
+                    "text": "Aucun délai ni menace."
+                },
+                "request": {
+                    "flag": "ok",
+                    "text": "Aucune demande : on vous invite à consulter votre espace, et le message rappelle ce qu'on ne vous demandera jamais."
+                },
+                "links": {
+                    "flag": "ok",
+                    "text": "Aucun lien : le message vous invite à ouvrir l'application ou à taper vous-même l'adresse."
+                },
+                "coherence": {
+                    "flag": "ok",
+                    "text": "Votre nom, le mois et le service correspondent à votre situation."
+                }
+            },
+            "summary": "Il parle de sécurité, de codes et de carte, mais pour vous rappeler de ne jamais les donner : aucune action dangereuse n'est demandée.",
+            "tips": [
+                "Ce ne sont pas les mots « banque » ou « sécurité » qui rendent un message dangereux, mais ce qu'il vous demande de faire.",
+                "Un message qui vous renvoie vers votre application, sans lien, est plutôt rassurant."
+            ],
+            "consequences": {
+                "reportedLegit": "Ce message ne présentait pas d'indice de phishing : le domaine est celui de votre banque, sans lien ni demande. Il évoque les codes uniquement pour rappeler de ne jamais les donner."
+            }
+        },
+        {
+            "id": "s19",
+            "difficulty": 3,
+            "isPhishing": true,
+            "time": "Mar. 6 oct., 16:45",
+            "sender": {
+                "name": "Hélène Vidal (Club de lecture)",
+                "address": "partage@docs-club-valmont.example"
+            },
+            "replyTo": null,
+            "subject": "Hélène Vidal a partagé « Programme du club » avec vous",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Bonjour,"
+                },
+                {
+                    "t": "p",
+                    "x": "Hélène Vidal vous invite à consulter le document « Programme du club — automne »."
+                },
+                {
+                    "t": "p",
+                    "x": "Pour l'ouvrir, connectez-vous avec l'adresse et le mot de passe de votre messagerie."
+                },
+                {
+                    "t": "btn",
+                    "x": "Ouvrir le document",
+                    "url": "https://docs-club-valmont.example/ouvrir?doc=programme"
+                },
+                {
+                    "t": "p",
+                    "x": "Ce lien expire dans 24 heures."
+                },
+                {
+                    "t": "sig",
+                    "x": "Partage de documents"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "alert",
+                    "text": "Le nom d'affichage est celui d'Hélène Vidal, mais l'adresse (« partage@docs-club-valmont.example ») n'est pas la sienne (« helene.vidal@club-lecture-valmont.example » dans vos notes). Un nom connu ne suffit pas."
+                },
+                "context": {
+                    "flag": "alert",
+                    "text": "Vos notes indiquent que vous n'attendez aucun document partagé."
+                },
+                "urgency": {
+                    "flag": "neutral",
+                    "text": "Un lien qui « expire dans 24 heures » est une pression légère, courante dans les faux messages comme dans les vrais : à lui seul, il ne prouve rien."
+                },
+                "request": {
+                    "flag": "alert",
+                    "text": "On vous demande l'adresse ET le mot de passe de votre messagerie pour ouvrir un simple document : un vrai service de partage ne demande pas cela."
+                },
+                "links": {
+                    "flag": "alert",
+                    "text": "Le bouton mène vers « docs-club-valmont.example », un domaine différent de celui d'Hélène et de ceux que vous connaissez."
+                },
+                "coherence": {
+                    "flag": "neutral",
+                    "text": "Le titre du document est plausible pour le club de lecture, ce qui rend le message crédible ; mais il commence par « Bonjour », sans votre nom."
+                }
+            },
+            "summary": "Un nom connu mais une adresse différente, un document inattendu et une demande de mot de passe : le classique faux partage de document.",
+            "tips": [
+                "Avant de vous connecter, demandez à la personne par un autre canal si elle a bien partagé un document.",
+                "Ne saisissez jamais le mot de passe de votre messagerie sur une page ouverte depuis un lien reçu par e-mail."
+            ],
+            "consequences": {
+                "trustedPhishing": "Dans une situation réelle, la fausse page de connexion aurait volé le mot de passe de votre messagerie, donnant accès à tous vos messages. Ici, rien n'a été saisi ni envoyé."
+            }
+        },
+        {
+            "id": "s20",
+            "difficulty": 2,
+            "isPhishing": false,
+            "time": "Mer. 7 oct., 08:40",
+            "sender": {
+                "name": "Julien Marchand",
+                "address": "julien.marchand@courriel-perso.example"
+            },
+            "replyTo": null,
+            "subject": "Merci pour dimanche !",
+            "attachments": [],
+            "body": [
+                {
+                    "t": "p",
+                    "x": "Salut !"
+                },
+                {
+                    "t": "p",
+                    "x": "Merci encore pour dimanche : malgré la pluie au Mont Verrier, c'était une chouette balade. Nadia m'a envoyé quelques photos, je te les montrerai quand on se verra."
+                },
+                {
+                    "t": "p",
+                    "x": "Dis-moi si tu es libre pour un café cette semaine."
+                },
+                {
+                    "t": "sig",
+                    "x": "Julien"
+                }
+            ],
+            "analysis": {
+                "sender": {
+                    "flag": "ok",
+                    "text": "L'adresse est exactement celle de Julien dans vos notes (« julien.marchand@courriel-perso.example »)."
+                },
+                "context": {
+                    "flag": "ok",
+                    "text": "Vos notes mentionnent la randonnée de dimanche avec Julien et Nadia au Mont Verrier, sous la pluie."
+                },
+                "urgency": {
+                    "flag": "ok",
+                    "text": "Aucune pression."
+                },
+                "request": {
+                    "flag": "ok",
+                    "text": "On vous propose un café : rien d'inquiétant, aucune donnée demandée."
+                },
+                "links": {
+                    "flag": "ok",
+                    "text": "Aucun lien ni pièce jointe."
+                },
+                "coherence": {
+                    "flag": "ok",
+                    "text": "Les détails (Mont Verrier, la pluie, Nadia) sont ceux que seul un ami présent connaît."
+                }
+            },
+            "summary": "Message d'un ami dont l'adresse et les détails correspondent à vos notes ; rien n'est demandé.",
+            "tips": [
+                "Des détails personnels précis qui concordent avec vos souvenirs sont un bon indice de cohérence, sans être une preuve à eux seuls.",
+                "Comparez avec le faux message d'« ami en détresse » : ici, aucune urgence ni demande d'argent."
+            ],
+            "consequences": {
+                "reportedLegit": "Ce message ne présentait pas d'indice de phishing : l'adresse est celle de votre ami, les détails correspondent et aucune demande n'est faite."
+            }
+        }
+    ]
+};

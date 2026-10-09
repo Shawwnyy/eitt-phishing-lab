@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#02060f">
+  <meta name="description" content="EITT Phishing Lab — une simulation pour apprendre à reconnaître les pièges du numérique.">
+  <title>EITT Phishing Lab</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/logo.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Aller au contenu</a>
+
+  <noscript>
+    <div class="noscript">Cette simulation nécessite JavaScript. Aucune donnée n'est collectée.</div>
+  </noscript>
+
+  <!-- ============ 1. ACCUEIL ============ -->
+  <main id="screen-home" class="screen home is-active">
+    <div class="home-inner" id="main-content" tabindex="-1">
+      <header class="home-top">
+        <div class="brand">
+          <!-- Emplacement du logo EITT : remplacer ou ajuster le composant animé si besoin -->
+          <div class="brand-logo eitt-logo--sm" data-eitt-logo data-intro="false"></div>
+          <p class="brand-name">EITT — Enseignement Informatique pour Toutes et Tous</p>
+        </div>
+      </header>
+
+      <section class="hero" aria-labelledby="home-title">
+        <div class="hero-logo eitt-logo--lg" data-eitt-logo></div>
+        <h1 id="home-title">EITT Phishing Lab</h1>
+        <p class="subtitle">Une simulation pour apprendre à reconnaître les pièges du numérique.</p>
+        <p class="lead">Installez-vous devant un ordinateur fictif, ouvrez votre boîte mail et examinez une série de messages (vous choisissez combien). Écrivez dans le Bloc-notes, gérez vos fichiers, puis décidez : message légitime ou tentative de phishing ? Après chaque choix, vous découvrez les indices à repérer et les bons réflexes à adopter.</p>
+
+        <div class="chips" role="list">
+          <span class="chip" role="listitem"><span data-icon="clock"></span> Sans limite de temps</span>
+          <span class="chip" role="listitem"><span data-icon="shield"></span> Aucune donnée collectée</span>
+          <span class="chip" role="listitem"><span data-icon="info"></span> Explications à chaque étape</span>
+          <span class="chip" role="listitem"><span data-icon="check"></span> Attestation dès 50 %</span>
+        </div>
+
+        <fieldset class="count-pick" id="count-pick" hidden>
+          <legend>Combien de messages voulez-vous analyser ?</legend>
+          <div class="count-options" id="count-options"></div>
+          <p class="muted" id="count-hint"></p>
+        </fieldset>
+
+        <div class="cta">
+          <button id="btn-launch" class="btn btn-primary btn-lg" type="button">Lancer la simulation</button>
+          <button id="btn-how" class="btn btn-ghost btn-lg" type="button">Comment ça fonctionne ?</button>
+        </div>
+        <p id="load-error" class="load-error" role="alert" hidden></p>
+      </section>
+
+      <section class="objectives" aria-label="Objectifs">
+        <article class="card">
+          <span class="card-icon" data-icon="alert"></span>
+          <h2>Identifier les signaux d'alerte</h2>
+          <p>Adresse de l'expéditeur, liens, pièces jointes, demandes inhabituelles : apprenez à repérer ce qui doit vous faire douter.</p>
+        </article>
+        <article class="card">
+          <span class="card-icon" data-icon="search"></span>
+          <h2>Analyser un message</h2>
+          <p>Un seul indice ne suffit presque jamais. Croisez le contexte, l'urgence, les demandes et la cohérence générale.</p>
+        </article>
+        <article class="card">
+          <span class="card-icon" data-icon="check"></span>
+          <h2>Adopter les bons réflexes</h2>
+          <p>Vérifier par un autre canal, ne jamais donner son mot de passe, signaler un message suspect : des gestes simples et efficaces.</p>
+        </article>
+      </section>
+
+      <p class="warning" role="note">
+        <span data-icon="info"></span>
+        <span><strong>Cet environnement est entièrement fictif.</strong> Aucune donnée personnelle ou aucun mot de passe réel ne vous sera demandé. Toutes les actions sont simulées à des fins pédagogiques.</span>
+      </p>
+
+      <footer class="home-foot">
+        <p>EITT — Enseignement Informatique pour Toutes et Tous</p>
+        <p class="muted">Simulation éducative inspirée des conventions générales d'un poste informatique. Elle n'est pas un produit Microsoft et n'utilise aucune marque réelle.</p>
+      </footer>
+    </div>
+  </main>
+
+  <!-- ============ 2. CONNEXION SIMULÉE ============ -->
+  <section id="screen-login" class="screen login" aria-label="Écran de connexion simulé">
+    <div class="login-bg" aria-hidden="true"></div>
+    <div class="login-top"><span class="pill">Environnement fictif</span></div>
+    <div class="login-sys"><span class="sys-ico" role="img" aria-label="Réseau Wi-Fi fictif : connecté" title="Réseau fictif « EITT-Atelier » : connecté"><span data-icon="wifi"></span></span>
+      <span class="sys-battery js-battery" role="img" aria-label="Batterie de l’appareil : information non disponible"></span></div>
+    <div class="login-clock">
+      <p class="big-time" id="login-time">09:00:00</p>
+      <p class="big-date" id="login-date">Vendredi 9 octobre</p>
+    </div>
+    <div class="login-card">
+      <div class="avatar" aria-hidden="true"><span data-icon="user"></span></div>
+      <h2>Utilisateur ou utilisatrice</h2>
+      <button id="btn-signin" class="btn btn-primary btn-lg" type="button">Se connecter</button>
+      <p class="login-note">Simulation : aucun mot de passe n'est demandé et rien n'est enregistré.</p>
+    </div>
+    <div class="login-bottom">
+      <button id="btn-login-back" class="btn btn-ghost" type="button"><span data-icon="chevron-left"></span> Retour à l'accueil</button>
+    </div>
+  </section>
+
+  <!-- ============ 3. CHARGEMENT ============ -->
+  <section id="screen-boot" class="screen boot" aria-label="Chargement de la session">
+    <div class="boot-inner">
+      <div class="eitt-logo--md" data-eitt-logo id="boot-logo"></div>
+      <h2 class="boot-title">Préparation de votre session</h2>
+      <p class="boot-step" id="boot-step" aria-live="polite">Chargement du profil fictif…</p>
+      <div class="bar" role="progressbar" aria-label="Préparation de la session" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="boot-bar"><span id="boot-fill"></span></div>
+      <p class="boot-pct" id="boot-pct" aria-hidden="true">0 %</p>
+    </div>
+  </section>
+
+  <!-- ============ 4. BUREAU VIRTUEL ============ -->
+  <section id="screen-desktop" class="screen desktop" aria-label="Bureau virtuel fictif">
+    <div class="desk-bg" aria-hidden="true"></div>
+    <div class="desk-icons" id="desk-icons" role="group" aria-label="Applications"></div>
+    <aside class="guide" id="guide" aria-label="Guide de mission">
+      <div class="guide-head"><strong>Votre mission</strong>
+        <button id="guide-close" class="icon-btn" type="button" aria-label="Masquer le guide"><span data-icon="close"></span></button></div>
+      <ol>
+        <li>Ouvrez <strong>Courrier</strong> : <strong id="guide-count">10</strong> messages vous attendent.</li>
+        <li>Lisez chaque message. Survolez les liens, ouvrez « Afficher les détails » et consultez vos <strong>Documents</strong> pour vérifier le contexte.</li>
+        <li>Choisissez <strong>Message légitime</strong> ou <strong>Tentative de phishing</strong>, puis lisez la correction.</li>
+      </ol>
+      <p class="muted">Aucune limite de temps. Le bilan arrive à la fin ; dès 50 % de réussite, vous recevez une attestation EITT. Essayez aussi le <strong>Bloc-notes</strong>, <strong>Documents</strong>, la <strong>Calculatrice</strong> et « Nouveau message » : ils fonctionnent vraiment.</p>
+    </aside>
+
+    <div class="windows" id="windows"></div>
+
+    <div class="toast" id="toast" role="status" hidden>
+      <span class="toast-icon" data-icon="mail"></span>
+      <div class="toast-text">
+        <strong id="toast-title">Courrier</strong>
+        <span id="toast-msg"></span>
+      </div>
+      <div class="toast-actions">
+        <button id="toast-open" class="btn btn-small btn-primary" type="button">Ouvrir</button>
+        <button id="toast-close" class="icon-btn" type="button" aria-label="Fermer la notification"><span data-icon="close"></span></button>
+      </div>
+    </div>
+
+    <nav class="startmenu" id="startmenu" aria-label="Menu Démarrer fictif" hidden>
+      <p class="sm-title">Applications</p>
+      <div class="sm-apps" id="sm-apps"></div>
+      <hr>
+      <button class="sm-item" id="sm-how" type="button"><span data-icon="info"></span> Comment ça fonctionne ?</button>
+      <button class="sm-item" id="sm-restart" type="button"><span data-icon="restart"></span> Redémarrer la simulation</button>
+      <button class="sm-item" id="sm-home" type="button"><span data-icon="home"></span> Retour à l'accueil</button>
+    </nav>
+
+    <footer class="taskbar">
+      <button id="btn-start" class="tb-start" type="button" aria-expanded="false" aria-controls="startmenu" aria-label="Menu Démarrer"><span data-icon="start"></span></button>
+      <div class="tb-tasks" id="tb-tasks" role="group" aria-label="Fenêtres ouvertes"></div>
+      <div class="tb-tray">
+        <button id="btn-timer" class="tb-timer" type="button" aria-pressed="false" title="Chronomètre facultatif (15 min, indicatif) : cliquez pour l'activer">
+          <span data-icon="timer"></span> <span id="timer-text">Sans limite</span>
+        </button>
+        <span class="sys-ico" role="img" aria-label="Réseau Wi-Fi fictif : connecté" title="Réseau fictif « EITT-Atelier » : connecté"><span data-icon="wifi"></span></span>
+        <span class="sys-battery js-battery" id="tb-battery" role="img" aria-label="Batterie de l’appareil : information non disponible"></span>
+        <time id="tb-clock" aria-label="Date et heure"><span id="tb-time">--:--:--</span><span id="tb-date"></span></time>
+      </div>
+    </footer>
+  </section>
+
+  <!-- ============ 5. BILAN ============ -->
+  <main id="screen-report" class="screen report" aria-labelledby="report-title">
+    <div class="report-inner">
+      <header class="report-top">
+        <div class="eitt-logo--sm" data-eitt-logo data-intro="false"></div>
+        <p class="brand-name">EITT — Enseignement Informatique pour Toutes et Tous</p>
+      </header>
+      <h1 id="report-title" tabindex="-1">Votre bilan</h1>
+      <div id="report-body"></div>
+    </div>
+  </main>
+
+  <!-- ============ DIALOGUES ============ -->
+  <dialog id="dlg-how" aria-labelledby="how-title">
+    <div class="dlg-head"><h2 id="how-title">Comment ça fonctionne ?</h2>
+      <button class="icon-btn dlg-close" type="button" aria-label="Fermer" data-close><span data-icon="close"></span></button></div>
+    <ol class="steps">
+      <li><strong>Connectez-vous</strong> à l'ordinateur fictif. Aucun mot de passe n'est demandé.</li>
+      <li><strong>Explorez le bureau</strong> : Courrier (avec « Nouveau message » pour s'entraîner à écrire), Navigateur, Documents, Bloc-notes, Calculatrice et Centre de sécurité. La batterie et l'heure (à la seconde) en bas à droite sont celles de votre appareil. Vos Documents contiennent des notes qui aident à juger le contexte, comme dans la vraie vie. Le Bloc-notes et Documents fonctionnent vraiment : écrire, enregistrer, créer, renommer, copier, supprimer, restaurer.</li>
+      <li><strong>Ouvrez chaque message</strong> du Courrier. Survolez les liens pour voir leur vraie destination, ouvrez les « Détails » de l'expéditeur, ou cliquez sur « Examiner les indices ».</li>
+      <li><strong>Décidez</strong> : « Message légitime » ou « Tentative de phishing ». Vous pouvez aussi utiliser Répondre, Signaler ou Supprimer (supprimer n'est pas une réponse).</li>
+      <li><strong>Lisez la correction</strong> : indices, conséquences simulées et bonnes pratiques. Le <strong>bilan</strong> s'affiche à la fin, quand tous les messages ont reçu une réponse. Avec au moins 50 % de bonnes réponses (5 sur 10, 10 sur 20…), vous obtenez une <strong>attestation de réussite EITT</strong> à imprimer ou télécharger.</li>
+    </ol>
+    <p class="muted">Vous choisissez le nombre de messages avant de commencer ; environ la moitié sont des tentatives de phishing, les autres sont légitimes. Les fichiers créés restent dans la simulation (ils disparaissent au rechargement) : utilisez « Télécharger » dans le Bloc-notes pour en garder une copie. <strong>Il n'y a aucune limite de temps</strong> : lisez à votre rythme. L'heure et la date affichées en bas à droite sont celles de votre appareil. Si vous aimez vous challenger, le bouton « Sans limite » active un chronomètre facultatif de 15 minutes ; il ne sanctionne jamais. Dans le Courrier, le bouton « Aide » rappelle la méthode à tout moment.</p>
+    <div class="dlg-actions"><button class="btn btn-primary" type="button" data-close>Compris</button></div>
+  </dialog>
+
+  <dialog id="dlg-info" aria-labelledby="info-title">
+    <div class="dlg-head"><h2 id="info-title">Information</h2>
+      <button class="icon-btn dlg-close" type="button" aria-label="Fermer" data-close><span data-icon="close"></span></button></div>
+    <div id="info-body"></div>
+    <div class="dlg-actions"><button class="btn btn-primary" type="button" data-close>Fermer</button></div>
+  </dialog>
+
+  <dialog id="dlg-reply" aria-labelledby="reply-title">
+    <div class="dlg-head"><h2 id="reply-title">Répondre au message</h2>
+      <button class="icon-btn dlg-close" type="button" aria-label="Fermer" data-close><span data-icon="close"></span></button></div>
+    <div id="reply-body"></div>
+    <div class="dlg-actions">
+      <button class="btn btn-ghost" type="button" data-close>Annuler</button>
+      <button id="reply-send" class="btn btn-primary" type="button">Envoyer la réponse (simulée)</button>
+    </div>
+  </dialog>
+
+  <dialog id="dlg-compose" class="dlg-wide" aria-labelledby="compose-title">
+    <div class="dlg-head"><h2 id="compose-title">Nouveau message</h2></div>
+    <p class="muted cp-note">Simulation : écrivez comme dans une vraie messagerie. <strong>Rien n'est envoyé</strong> : le message reste dans cette page et disparaît au rechargement. Fermer cette fenêtre enregistre un brouillon.</p>
+    <label class="ask-label" for="cp-from">De</label>
+    <input class="field" id="cp-from" type="text" value="utilisateur@eitt-demo.example" readonly>
+    <label class="ask-label" for="cp-to">À</label>
+    <input class="field" id="cp-to" type="text" inputmode="email" autocomplete="off" spellcheck="false" maxlength="120" placeholder="ami@exemple.example">
+    <label class="ask-label" for="cp-subject">Objet</label>
+    <input class="field" id="cp-subject" type="text" autocomplete="off" maxlength="150">
+    <label class="ask-label" for="cp-body">Message</label>
+    <textarea class="field cp-body" id="cp-body" rows="6" maxlength="5000"></textarea>
+    <div class="cp-attach" id="cp-attach"></div>
+    <button class="btn btn-small" id="cp-attach-btn" type="button"><span data-icon="clip"></span> Joindre un fichier de Documents</button>
+    <ul class="cp-hints" id="cp-hints" aria-live="polite" hidden></ul>
+    <p class="field-err" id="cp-err" role="alert" hidden></p>
+    <div class="dlg-actions">
+      <button class="btn btn-ghost" id="cp-discard" type="button">Supprimer</button>
+      <button class="btn" id="cp-save" type="button">Enregistrer le brouillon</button>
+      <button class="btn btn-primary" id="cp-send" type="button">Envoyer (simulé)</button>
+    </div>
+  </dialog>
+
+  <dialog id="dlg-ask" aria-labelledby="ask-title">
+    <div class="dlg-head"><h2 id="ask-title"></h2></div>
+    <p id="ask-msg" hidden></p>
+    <label class="ask-label" id="ask-label" for="ask-input" hidden></label>
+    <input class="field" id="ask-input" type="text" maxlength="80" autocomplete="off" spellcheck="false" hidden>
+    <label class="ask-label" id="ask-sel-label" for="ask-select" hidden></label>
+    <select class="field" id="ask-select" hidden></select>
+    <p class="field-err" id="ask-err" role="alert" hidden></p>
+    <div class="dlg-actions" id="ask-actions"></div>
+  </dialog>
+
+  <dialog id="dlg-timer" aria-labelledby="timer-title">
+    <div class="dlg-head"><h2 id="timer-title">Le temps indicatif est écoulé</h2></div>
+    <p>Vos réponses sont conservées et rien n'est sanctionné. Poursuivez à votre rythme : le bilan s'affichera quand tous les messages auront reçu une réponse.</p>
+    <div class="dlg-actions">
+      <button id="timer-continue" class="btn btn-primary" type="button">Continuer à mon rythme</button>
+    </div>
+  </dialog>
+
+  <script src="data/scenarios.js"></script>
+  <script src="js/logo.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

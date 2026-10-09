@@ -1,0 +1,4 @@
+# Seuls scenarios.php et stats.php sont des points d'entrée publics.
+<FilesMatch "^(config|config\.sample|db|build-data)\.php$">
+  Require all denied
+</FilesMatch>

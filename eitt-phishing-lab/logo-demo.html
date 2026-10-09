@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="color-scheme" content="dark">
+  <title>Logo animé EITT</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/logo.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="scroll">
+  <main class="logo-demo">
+    <div id="logo" data-eitt-logo></div>
+    <div class="logo-demo-controls">
+      <button id="btn-replay" class="btn" type="button">Rejouer l'intro</button>
+      <button id="btn-pause" class="btn" type="button" aria-pressed="false">Pause</button>
+      <button class="btn btn-ghost" type="button" data-size="eitt-logo--sm">Petit</button>
+      <button class="btn btn-ghost" type="button" data-size="eitt-logo--md">Moyen</button>
+      <button class="btn btn-ghost" type="button" data-size="eitt-logo--lg">Grand</button>
+    </div>
+    <p class="muted">EITT — Enseignement Informatique pour Toutes et Tous</p>
+    <p class="muted"><a href="index.html">Ouvrir EITT Phishing Lab</a></p>
+  </main>
+  <script src="js/logo.js"></script>
+  <script src="js/logo-demo.js"></script>
+</body>
+</html>
